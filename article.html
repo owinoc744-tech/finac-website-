@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>The 50/30/20 Rule – FINAC</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+
+  <!-- ✅ ADSENSE: Replace ca-pub-XXXXXXXXXXXXXXXX with your Publisher ID after approval -->
+  <!-- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script> -->
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --green-dark:  #0a2e1a;
+      --green-mid:   #145a32;
+      --green-light: #1e8449;
+      --gold:        #c9a84c;
+      --gold-light:  #f0c040;
+      --white:       #ffffff;
+      --text-dim:    #a8b8a0;
+      --body-text:   #d4e4d0;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--green-dark);
+      color: var(--white);
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.2rem 5%;
+      background: rgba(10,46,26,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(201,168,76,0.15);
+    }
+    .logo {
+      font-family: 'Syne', sans-serif; font-size: 1.7rem; font-weight: 800;
+      letter-spacing: 0.12em; color: var(--gold); text-decoration: none;
+    }
+    .logo span { color: var(--white); }
+    nav ul { list-style: none; display: flex; gap: 2rem; }
+    nav ul a {
+      text-decoration: none; color: var(--text-dim);
+      font-size: 0.9rem; font-weight: 500; transition: color 0.2s;
+    }
+    nav ul a:hover { color: var(--gold-light); }
+    .nav-cta {
+      background: var(--gold); color: var(--green-dark) !important;
+      padding: 0.5rem 1.2rem; border-radius: 4px; font-weight: 600 !important;
+    }
+
+    /* ── PAGE LAYOUT ── */
+    .page-wrap {
+      max-width: 1200px; margin: 0 auto;
+      padding: 7rem 5% 4rem;
+      display: grid;
+      grid-template-columns: 1fr 300px;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    /* ── ARTICLE ── */
+    .article-header { margin-bottom: 2.5rem; }
+    .breadcrumb {
+      font-size: 0.78rem; color: var(--text-dim); margin-bottom: 1.2rem;
+    }
+    .breadcrumb a { color: var(--gold); text-decoration: none; }
+    .breadcrumb a:hover { text-decoration: underline; }
+    .article-category {
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--gold); margin-bottom: 1rem;
+    }
+    .article-title {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 800; line-height: 1.1;
+      margin-bottom: 1.2rem;
+    }
+    .article-subtitle {
+      font-size: 1.1rem; color: var(--text-dim); line-height: 1.7;
+      margin-bottom: 1.5rem;
+    }
+    .article-meta {
+      display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap;
+      font-size: 0.82rem; color: var(--text-dim);
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid rgba(201,168,76,0.12);
+    }
+    .article-meta strong { color: var(--gold); }
+    .meta-dot { color: rgba(201,168,76,0.3); }
+
+    /* ── AD SLOT STYLES ── */
+    .ad-slot {
+      background: rgba(255,255,255,0.03);
+      border: 1px dashed rgba(201,168,76,0.2);
+      border-radius: 6px;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center; color: var(--text-dim);
+      font-size: 0.75rem; letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    .ad-slot .ad-label { margin-bottom: 0.4rem; opacity: 0.5; }
+
+    /* Top banner ad */
+    .ad-banner-top {
+      width: 100%; height: 90px;
+      margin-bottom: 2rem;
+    }
+
+    /* In-content ad */
+    .ad-in-content {
+      width: 100%; height: 250px;
+      margin: 2.5rem 0;
+    }
+
+    /* Sidebar ad */
+    .ad-sidebar {
+      width: 100%; height: 250px;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Sidebar sticky tall ad */
+    .ad-sidebar-tall {
+      width: 100%; height: 600px;
+    }
+
+    /* ── ARTICLE BODY ── */
+    .article-body { line-height: 1.85; color: var(--body-text); }
+    .article-body h2 {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.5rem; font-weight: 800;
+      color: var(--white); margin: 2.5rem 0 1rem;
+      padding-left: 1rem;
+      border-left: 3px solid var(--gold);
+    }
+    .article-body h3 {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.1rem; font-weight: 700;
+      color: var(--white); margin: 2rem 0 0.7rem;
+    }
+    .article-body p { margin-bottom: 1.3rem; }
+    .article-body ul, .article-body ol {
+      padding-left: 1.5rem; margin-bottom: 1.3rem;
+    }
+    .article-body li { margin-bottom: 0.5rem; }
+    .article-body strong { color: var(--white); font-weight: 600; }
+    .article-body a { color: var(--gold); text-decoration: underline; }
+
+    /* callout box */
+    .callout {
+      background: rgba(201,168,76,0.07);
+      border: 1px solid rgba(201,168,76,0.25);
+      border-radius: 8px; padding: 1.5rem 1.8rem;
+      margin: 2rem 0;
+    }
+    .callout-title {
+      font-family: 'Syne', sans-serif; font-size: 0.85rem;
+      font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 0.7rem;
+    }
+    .callout p { margin: 0; font-size: 0.95rem; }
+
+    /* visual budget bar */
+    .budget-visual {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(201,168,76,0.12);
+      border-radius: 10px; padding: 2rem; margin: 2rem 0;
+    }
+    .budget-visual h4 {
+      font-family: 'Syne', sans-serif; font-size: 0.9rem;
+      font-weight: 700; color: var(--white); margin-bottom: 1.5rem;
+    }
+    .bar-row { display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: 1.2rem; }
+    .bar-label {
+      font-size: 0.82rem; color: var(--text-dim);
+      display: flex; justify-content: space-between;
+    }
+    .bar-label strong { color: var(--white); }
+    .bar-track {
+      height: 10px; background: rgba(255,255,255,0.06);
+      border-radius: 5px; overflow: hidden;
+    }
+    .bar-fill {
+      height: 100%; border-radius: 5px;
+      background: linear-gradient(90deg, var(--green-light), var(--gold));
+    }
+
+    /* tags */
+    .article-tags { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid rgba(201,168,76,0.1); }
+    .article-tags span {
+      font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--text-dim); margin-right: 0.5rem;
+    }
+    .tag {
+      display: inline-block; padding: 0.3rem 0.8rem;
+      background: rgba(201,168,76,0.08);
+      border: 1px solid rgba(201,168,76,0.2);
+      border-radius: 3px; font-size: 0.78rem; color: var(--gold);
+      margin-right: 0.5rem; margin-top: 0.5rem;
+    }
+
+    /* related posts */
+    .related { margin-top: 4rem; }
+    .related h3 {
+      font-family: 'Syne', sans-serif; font-size: 1.2rem;
+      font-weight: 800; margin-bottom: 1.5rem;
+    }
+    .related-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+    .related-card {
+      border: 1px solid rgba(201,168,76,0.1);
+      border-radius: 6px; padding: 1.2rem;
+      text-decoration: none; color: inherit;
+      transition: border-color 0.2s;
+    }
+    .related-card:hover { border-color: var(--gold); }
+    .related-cat {
+      font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--gold); margin-bottom: 0.5rem;
+    }
+    .related-card h4 {
+      font-family: 'Syne', sans-serif; font-size: 0.9rem;
+      font-weight: 700; line-height: 1.3; color: var(--white);
+    }
+
+    /* ── SIDEBAR ── */
+    .sidebar { position: sticky; top: 6rem; }
+    .sidebar-widget {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(201,168,76,0.1);
+      border-radius: 8px; padding: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .widget-title {
+      font-family: 'Syne', sans-serif; font-size: 0.8rem;
+      font-weight: 800; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--gold);
+      margin-bottom: 1.2rem;
+    }
+    .sidebar-post {
+      display: flex; flex-direction: column;
+      padding: 0.8rem 0;
+      border-bottom: 1px solid rgba(201,168,76,0.07);
+      text-decoration: none; color: inherit;
+    }
+    .sidebar-post:last-child { border-bottom: none; }
+    .sidebar-post-cat {
+      font-size: 0.68rem; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--gold); margin-bottom: 0.3rem;
+    }
+    .sidebar-post h4 {
+      font-size: 0.85rem; font-weight: 600; line-height: 1.35;
+      color: var(--white); transition: color 0.2s;
+    }
+    .sidebar-post:hover h4 { color: var(--gold-light); }
+
+    /* newsletter widget */
+    .newsletter-widget input {
+      width: 100%; background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(201,168,76,0.2);
+      color: var(--white); padding: 0.7rem 1rem;
+      border-radius: 4px; font-size: 0.85rem;
+      outline: none; margin-bottom: 0.7rem;
+    }
+    .newsletter-widget input::placeholder { color: #6a7d6a; }
+    .newsletter-widget button {
+      width: 100%; background: var(--gold); color: var(--green-dark);
+      border: none; padding: 0.7rem; border-radius: 4px;
+      font-weight: 700; font-size: 0.85rem; cursor: pointer;
+    }
+    .newsletter-widget p {
+      font-size: 0.82rem; color: var(--text-dim); margin-bottom: 1rem; line-height: 1.5;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid rgba(201,168,76,0.1);
+      padding: 2.5rem 5%;
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 1rem; margin-top: 4rem;
+    }
+    .footer-logo {
+      font-family: 'Syne', sans-serif; font-size: 1.3rem;
+      font-weight: 800; color: var(--gold); letter-spacing: 0.1em;
+    }
+    .footer-links { display: flex; gap: 2rem; }
+    .footer-links a {
+      text-decoration: none; color: var(--text-dim);
+      font-size: 0.85rem; transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--gold); }
+    .footer-copy { font-size: 0.78rem; color: #4a5e4a; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .page-wrap { grid-template-columns: 1fr; }
+      .sidebar { position: static; }
+      .related-grid { grid-template-columns: 1fr; }
+      nav ul { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="logo">FIN<span>AC</span></a>
+  <ul>
+    <li><a href="index.html#topics">Topics</a></li>
+    <li><a href="index.html#posts">Articles</a></li>
+    <li><a href="index.html#newsletter">Newsletter</a></li>
+    <li><a href="index.html#newsletter" class="nav-cta">Get Started</a></li>
+  </ul>
+</nav>
+
+<div class="page-wrap">
+
+  <!-- MAIN ARTICLE -->
+  <main>
+
+    <!-- 🟡 AD SLOT 1: Banner below nav (728x90 leaderboard) -->
+    <div class="ad-slot ad-banner-top">
+      <div class="ad-label">Advertisement</div>
+      <!-- Paste your AdSense leaderboard code here after approval:
+      <ins class="adsbygoogle"
+           style="display:inline-block;width:728px;height:90px"
+           data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+           data-ad-slot="XXXXXXXXXX"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+      -->
+      <span>728 × 90 — Leaderboard Ad</span>
+    </div>
+
+    <div class="article-header">
+      <div class="breadcrumb">
+        <a href="index.html">Home</a> › <a href="#">Budgeting</a> › The 50/30/20 Rule
+      </div>
+      <div class="article-category">Budgeting</div>
+      <h1 class="article-title">The 50/30/20 Rule: A Budget Framework That Actually Works</h1>
+      <p class="article-subtitle">Most budgets fail because they're too complicated. This simple three-bucket method gives you a clear structure without tracking every single penny.</p>
+      <div class="article-meta">
+        <span>By <strong>FINAC Editorial</strong></span>
+        <span class="meta-dot">·</span>
+        <span>June 20, 2026</span>
+        <span class="meta-dot">·</span>
+        <span>8 min read</span>
+      </div>
+    </div>
+
+    <div class="article-body">
+
+      <p>If you've ever tried to budget and given up, you're not alone. Most budgeting systems demand that you track every coffee, every subscription, every impulse buy — and that level of detail is exhausting. The <strong>50/30/20 rule</strong> takes a different approach: instead of counting every dollar, it gives your money a simple job description.</p>
+
+      <h2>What Is the 50/30/20 Rule?</h2>
+
+      <p>The 50/30/20 rule divides your <strong>after-tax income</strong> into three categories:</p>
+
+      <div class="budget-visual">
+        <h4>Your income, split three ways</h4>
+        <div class="bar-row">
+          <div class="bar-label"><strong>50% — Needs</strong><span>Essentials you can't skip</span></div>
+          <div class="bar-track"><div class="bar-fill" style="width:50%"></div></div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label"><strong>30% — Wants</strong><span>Things that make life enjoyable</span></div>
+          <div class="bar-track"><div class="bar-fill" style="width:30%"></div></div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label"><strong>20% — Savings & Debt</strong><span>Your financial future</span></div>
+          <div class="bar-track"><div class="bar-fill" style="width:20%"></div></div>
+        </div>
+      </div>
+
+      <p>The beauty of this system is its flexibility. You're not micromanaging line items — you're simply asking: does this expense fit in my needs, wants, or savings bucket?</p>
+
+      <h2>The 50% — Needs</h2>
+
+      <p>Needs are expenses you genuinely cannot avoid. These include:</p>
+      <ul>
+        <li>Rent or mortgage payments</li>
+        <li>Utilities (electricity, water, internet)</li>
+        <li>Groceries and basic food</li>
+        <li>Transportation to work</li>
+        <li>Minimum debt payments</li>
+        <li>Basic health insurance</li>
+      </ul>
+
+      <p>The key question: <em>Would I be in serious trouble if I skipped this?</em> If yes, it's a need. If you can go without it for a month and be fine, it might belong in wants.</p>
+
+      <div class="callout">
+        <div class="callout-title">💡 Quick Check</div>
+        <p>If your needs are eating up more than 50% of your income, look at your biggest fixed cost first — usually rent. A lower-cost living situation can free up hundreds per month instantly.</p>
+      </div>
+
+      <!-- 🟡 AD SLOT 2: In-content ad (336x280 or responsive) — placed mid-article -->
+      <div class="ad-slot ad-in-content">
+        <div class="ad-label">Advertisement</div>
+        <!-- Paste your AdSense in-content code here:
+        <ins class="adsbygoogle"
+             style="display:block; text-align:center;"
+             data-ad-layout="in-article"
+             data-ad-format="fluid"
+             data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+             data-ad-slot="XXXXXXXXXX"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        -->
+        <span>In-Content Ad — 336 × 280 or Responsive</span>
+      </div>
+
+      <h2>The 30% — Wants</h2>
+
+      <p>Wants are the spending that makes life enjoyable but isn't strictly necessary. This bucket is broader than most people think:</p>
+      <ul>
+        <li>Dining out and takeaway</li>
+        <li>Streaming services (Netflix, Spotify)</li>
+        <li>Gym memberships</li>
+        <li>Hobbies and entertainment</li>
+        <li>New clothes beyond basics</li>
+        <li>Travel and vacations</li>
+      </ul>
+
+      <p>This category is where most people run into trouble — not because they're spending too much on any one thing, but because small wants add up fast. A $15 streaming service here, a $30 dinner there, and suddenly the 30% bucket is overflowing.</p>
+
+      <h3>The "Want or Need?" Test</h3>
+      <p>Internet is a need. But upgrading to the fastest tier because you want faster streaming? That extra cost is a want. Use this distinction to sort edge cases — it helps more than any rigid list.</p>
+
+      <h2>The 20% — Savings & Debt</h2>
+
+      <p>This is the bucket that builds your financial security. It includes:</p>
+      <ul>
+        <li><strong>Emergency fund</strong> — aim for 3–6 months of expenses</li>
+        <li><strong>Retirement contributions</strong> — 401(k), IRA, pension</li>
+        <li><strong>Investments</strong> — index funds, brokerage account</li>
+        <li><strong>Extra debt payments</strong> — above the minimums</li>
+        <li><strong>Saving for specific goals</strong> — house deposit, car, travel fund</li>
+      </ul>
+
+      <div class="callout">
+        <div class="callout-title">📌 Priority Order</div>
+        <p>If you have high-interest debt (credit cards, personal loans), put most of the 20% toward paying it off first. Once it's cleared, redirect that money into savings and investments.</p>
+      </div>
+
+      <h2>A Real Example</h2>
+
+      <p>Let's say you take home <strong>$3,500/month</strong> after tax:</p>
+      <ul>
+        <li><strong>$1,750 (50%)</strong> — rent $1,100, groceries $300, transport $200, utilities $150</li>
+        <li><strong>$1,050 (30%)</strong> — dining $200, streaming $50, gym $40, clothes $100, fun $660</li>
+        <li><strong>$700 (20%)</strong> — emergency fund $200, retirement $300, extra debt payment $200</li>
+      </ul>
+
+      <p>It doesn't have to be exact every month. The 50/30/20 rule is a guide, not a straitjacket. Some months you'll spend more on needs (car repair), some months more on wants (holiday). What matters is the average over time.</p>
+
+      <h2>When to Adjust the Percentages</h2>
+
+      <p>The 50/30/20 split is a starting point — not a rule set in stone. You might want to shift it if:</p>
+      <ul>
+        <li>You're in serious debt → try 50/20/30 (more toward debt payoff)</li>
+        <li>You have a high income with low expenses → push savings to 30–40%</li>
+        <li>You're saving for a major goal → temporarily cut wants to 20%</li>
+      </ul>
+
+      <h2>How to Start Today</h2>
+      <ol>
+        <li>Calculate your monthly take-home pay</li>
+        <li>Multiply by 0.5, 0.3, and 0.2 to get your three limits</li>
+        <li>Review last month's bank statement and sort every transaction into a bucket</li>
+        <li>Identify which bucket is overspending</li>
+        <li>Make one adjustment — just one — and track it for 30 days</li>
+      </ol>
+
+      <p>You don't need a fancy app or spreadsheet to start. A piece of paper and a highlighter will do. The system only works if you actually use it.</p>
+
+    </div>
+
+    <!-- Tags -->
+    <div class="article-tags">
+      <span>Tags:</span>
+      <span class="tag">Budgeting</span>
+      <span class="tag">Personal Finance</span>
+      <span class="tag">Money Tips</span>
+      <span class="tag">Saving</span>
+    </div>
+
+    <!-- 🟡 AD SLOT 3: End of article (responsive) -->
+    <div class="ad-slot ad-in-content" style="margin-top:2.5rem;">
+      <div class="ad-label">Advertisement</div>
+      <!-- Paste your AdSense end-of-article code here:
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-format="auto"
+           data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+           data-ad-slot="XXXXXXXXXX"
+           data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+      -->
+      <span>End-of-Article Ad — Responsive</span>
+    </div>
+
+    <!-- Related Posts -->
+    <div class="related">
+      <h3>Keep Reading</h3>
+      <div class="related-grid">
+        <a href="#" class="related-card">
+          <div class="related-cat">Saving</div>
+          <h4>How to Build a $1,000 Emergency Fund in 90 Days</h4>
+        </a>
+        <a href="#" class="related-card">
+          <div class="related-cat">Debt</div>
+          <h4>Avalanche vs Snowball: The Best Way to Pay Off Debt</h4>
+        </a>
+        <a href="#" class="related-card">
+          <div class="related-cat">Investing</div>
+          <h4>Index Funds vs ETFs: What's the Real Difference?</h4>
+        </a>
+        <a href="#" class="related-card">
+          <div class="related-cat">Budgeting</div>
+          <h4>Zero-Based Budgeting: Give Every Dollar a Job</h4>
+        </a>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+
+    <!-- 🟡 AD SLOT 4: Sidebar rectangle (300x250) -->
+    <div class="ad-slot ad-sidebar">
+      <div class="ad-label">Advertisement</div>
+      <!-- Paste your AdSense sidebar code here:
+      <ins class="adsbygoogle"
+           style="display:inline-block;width:300px;height:250px"
+           data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+           data-ad-slot="XXXXXXXXXX"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+      -->
+      <span>300 × 250 — Sidebar Ad</span>
+    </div>
+
+    <!-- Newsletter widget -->
+    <div class="sidebar-widget newsletter-widget">
+      <div class="widget-title">Free Weekly Tips</div>
+      <p>Get practical money advice every week — no spam, ever.</p>
+      <input type="email" placeholder="your@email.com" />
+      <button>Subscribe Free</button>
+    </div>
+
+    <!-- Popular posts -->
+    <div class="sidebar-widget">
+      <div class="widget-title">Popular Articles</div>
+      <a href="#" class="sidebar-post">
+        <div class="sidebar-post-cat">Investing</div>
+        <h4>Index Funds vs ETFs: What's the Real Difference?</h4>
+      </a>
+      <a href="#" class="sidebar-post">
+        <div class="sidebar-post-cat">Saving</div>
+        <h4>How to Build a $1,000 Emergency Fund in 90 Days</h4>
+      </a>
+      <a href="#" class="sidebar-post">
+        <div class="sidebar-post-cat">Side Income</div>
+        <h4>5 Legitimate Ways to Earn an Extra $500 a Month</h4>
+      </a>
+      <a href="#" class="sidebar-post">
+        <div class="sidebar-post-cat">Taxes</div>
+        <h4>Tax Deductions Most People Miss</h4>
+      </a>
+    </div>
+
+    <!-- 🟡 AD SLOT 5: Sidebar tall (300x600) -->
+    <div class="ad-slot ad-sidebar-tall">
+      <div class="ad-label">Advertisement</div>
+      <!-- Paste your AdSense tall sidebar code here:
+      <ins class="adsbygoogle"
+           style="display:inline-block;width:300px;height:600px"
+           data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+           data-ad-slot="XXXXXXXXXX"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+      -->
+      <span>300 × 600 — Tall Sidebar Ad</span>
+    </div>
+
+  </aside>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">FINAC</div>
+  <div class="footer-links">
+    <a href="#">About</a>
+    <a href="#">Topics</a>
+    <a href="#">Privacy Policy</a>
+    <a href="#">Contact</a>
+  </div>
+  <div class="footer-copy">© 2026 FINAC. All rights reserved.</div>
+</footer>
+
+</body>
+</html>

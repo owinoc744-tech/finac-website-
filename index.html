@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>FINAC – Take Control of Your Money</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --green-dark:  #0a2e1a;
+      --green-mid:   #145a32;
+      --green-light: #1e8449;
+      --gold:        #c9a84c;
+      --gold-light:  #f0c040;
+      --cream:       #f5f0e8;
+      --white:       #ffffff;
+      --text-dim:    #a8b8a0;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--green-dark);
+      color: var(--white);
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.2rem 5%;
+      background: rgba(10, 46, 26, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(201,168,76,0.15);
+    }
+    .logo {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.7rem; font-weight: 800;
+      letter-spacing: 0.12em;
+      color: var(--gold);
+    }
+    .logo span { color: var(--white); }
+    nav ul { list-style: none; display: flex; gap: 2rem; }
+    nav ul a {
+      text-decoration: none; color: var(--text-dim);
+      font-size: 0.9rem; font-weight: 500; letter-spacing: 0.04em;
+      transition: color 0.2s;
+    }
+    nav ul a:hover { color: var(--gold-light); }
+    .nav-cta {
+      background: var(--gold); color: var(--green-dark) !important;
+      padding: 0.5rem 1.2rem; border-radius: 4px; font-weight: 600 !important;
+    }
+    .nav-cta:hover { background: var(--gold-light) !important; color: var(--green-dark) !important; }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 8rem 5% 4rem;
+      position: relative; overflow: hidden;
+    }
+    .hero-grid {
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(201,168,76,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(201,168,76,0.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+    .hero-glow {
+      position: absolute; top: -10%; right: -5%;
+      width: 55vw; height: 55vw; border-radius: 50%;
+      background: radial-gradient(circle, rgba(30,132,73,0.25) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-content { position: relative; max-width: 720px; }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 0.6rem;
+      font-size: 0.78rem; font-weight: 600; letter-spacing: 0.14em;
+      color: var(--gold); text-transform: uppercase;
+      margin-bottom: 1.5rem;
+    }
+    .eyebrow::before {
+      content: ''; display: block;
+      width: 28px; height: 2px; background: var(--gold);
+    }
+    h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(2.8rem, 6vw, 5rem);
+      font-weight: 800; line-height: 1.05;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.4rem;
+    }
+    h1 .accent { color: var(--gold); }
+    .hero-sub {
+      font-size: 1.1rem; color: var(--text-dim);
+      line-height: 1.7; max-width: 520px;
+      margin-bottom: 2.5rem;
+    }
+    .btn-row { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--gold); color: var(--green-dark);
+      padding: 0.85rem 2rem; border-radius: 4px;
+      font-weight: 700; font-size: 0.95rem; letter-spacing: 0.03em;
+      text-decoration: none; transition: background 0.2s, transform 0.15s;
+    }
+    .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); }
+    .btn-secondary {
+      border: 1px solid rgba(201,168,76,0.4); color: var(--gold);
+      padding: 0.85rem 2rem; border-radius: 4px;
+      font-weight: 600; font-size: 0.95rem;
+      text-decoration: none; transition: border-color 0.2s, color 0.2s;
+    }
+    .btn-secondary:hover { border-color: var(--gold); color: var(--gold-light); }
+
+    /* stats strip */
+    .stats {
+      display: flex; gap: 3rem; flex-wrap: wrap;
+      margin-top: 4rem; padding-top: 2.5rem;
+      border-top: 1px solid rgba(201,168,76,0.12);
+    }
+    .stat-num {
+      font-family: 'Syne', sans-serif;
+      font-size: 2rem; font-weight: 800; color: var(--gold);
+    }
+    .stat-label { font-size: 0.8rem; color: var(--text-dim); margin-top: 0.2rem; }
+
+    /* ── TOPICS ── */
+    .topics { padding: 6rem 5%; }
+    .section-label {
+      font-size: 0.75rem; font-weight: 600; letter-spacing: 0.16em;
+      text-transform: uppercase; color: var(--gold);
+      margin-bottom: 1rem;
+    }
+    .section-title {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      font-weight: 800; margin-bottom: 3rem;
+      line-height: 1.15;
+    }
+    .topic-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+    }
+    .topic-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(201,168,76,0.1);
+      border-radius: 8px; padding: 2rem;
+      transition: border-color 0.25s, transform 0.2s;
+      cursor: pointer;
+    }
+    .topic-card:hover {
+      border-color: rgba(201,168,76,0.4);
+      transform: translateY(-4px);
+    }
+    .topic-icon {
+      font-size: 2rem; margin-bottom: 1rem;
+    }
+    .topic-card h3 {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.1rem; font-weight: 700;
+      margin-bottom: 0.6rem; color: var(--white);
+    }
+    .topic-card p { font-size: 0.88rem; color: var(--text-dim); line-height: 1.6; }
+    .topic-tag {
+      display: inline-block; margin-top: 1.2rem;
+      font-size: 0.72rem; font-weight: 600; letter-spacing: 0.08em;
+      color: var(--gold); text-transform: uppercase;
+    }
+
+    /* ── FEATURED ARTICLE ── */
+    .featured { padding: 6rem 5%; background: rgba(255,255,255,0.02); }
+    .featured-inner {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 4rem;
+      align-items: center;
+    }
+    .featured-label {
+      font-size: 0.75rem; font-weight: 600; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--gold); margin-bottom: 1rem;
+    }
+    .featured h2 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      font-weight: 800; line-height: 1.2; margin-bottom: 1.2rem;
+    }
+    .featured p { color: var(--text-dim); line-height: 1.75; margin-bottom: 1.8rem; }
+    .article-meta { font-size: 0.8rem; color: var(--text-dim); margin-top: 1.5rem; }
+    .article-meta strong { color: var(--gold); }
+
+    .featured-visual {
+      background: linear-gradient(135deg, var(--green-mid), var(--green-dark));
+      border: 1px solid rgba(201,168,76,0.15);
+      border-radius: 12px; padding: 2.5rem;
+      display: flex; flex-direction: column; gap: 1.2rem;
+    }
+    .bar-row { display: flex; flex-direction: column; gap: 0.4rem; }
+    .bar-label { font-size: 0.8rem; color: var(--text-dim); display: flex; justify-content: space-between; }
+    .bar-track {
+      height: 8px; background: rgba(255,255,255,0.07); border-radius: 4px; overflow: hidden;
+    }
+    .bar-fill {
+      height: 100%; border-radius: 4px;
+      background: linear-gradient(90deg, var(--green-light), var(--gold));
+      transition: width 1s ease;
+    }
+    .chart-title {
+      font-family: 'Syne', sans-serif; font-size: 0.9rem;
+      font-weight: 700; color: var(--white); margin-bottom: 0.5rem;
+    }
+
+    /* ── LATEST POSTS ── */
+    .posts { padding: 6rem 5%; }
+    .posts-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem; margin-top: 3rem;
+    }
+    .post-card {
+      border-bottom: 2px solid rgba(201,168,76,0.15);
+      padding-bottom: 1.5rem;
+      transition: border-color 0.2s;
+    }
+    .post-card:hover { border-color: var(--gold); }
+    .post-category {
+      font-size: 0.7rem; font-weight: 700; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--gold); margin-bottom: 0.7rem;
+    }
+    .post-card h3 {
+      font-family: 'Syne', sans-serif;
+      font-size: 1rem; font-weight: 700; line-height: 1.35;
+      margin-bottom: 0.6rem; color: var(--white);
+    }
+    .post-card p { font-size: 0.85rem; color: var(--text-dim); line-height: 1.6; }
+    .post-meta { font-size: 0.75rem; color: #6a7d6a; margin-top: 1rem; }
+
+    /* ── NEWSLETTER ── */
+    .newsletter {
+      margin: 0 5% 6rem;
+      background: linear-gradient(135deg, var(--green-mid) 0%, #0d3d20 100%);
+      border: 1px solid rgba(201,168,76,0.2);
+      border-radius: 12px; padding: 4rem;
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 2rem; flex-wrap: wrap;
+    }
+    .newsletter h2 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(1.4rem, 2.5vw, 2rem);
+      font-weight: 800; margin-bottom: 0.6rem;
+    }
+    .newsletter p { color: var(--text-dim); font-size: 0.95rem; }
+    .newsletter-form { display: flex; gap: 0.7rem; flex-wrap: wrap; }
+    .newsletter-form input {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(201,168,76,0.2);
+      color: var(--white); padding: 0.8rem 1.2rem;
+      border-radius: 4px; font-size: 0.9rem;
+      outline: none; min-width: 220px;
+      transition: border-color 0.2s;
+    }
+    .newsletter-form input::placeholder { color: #6a7d6a; }
+    .newsletter-form input:focus { border-color: var(--gold); }
+    .newsletter-form button {
+      background: var(--gold); color: var(--green-dark);
+      border: none; padding: 0.8rem 1.6rem;
+      border-radius: 4px; font-weight: 700; font-size: 0.9rem;
+      cursor: pointer; transition: background 0.2s;
+    }
+    .newsletter-form button:hover { background: var(--gold-light); }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid rgba(201,168,76,0.1);
+      padding: 3rem 5%;
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 1.5rem;
+    }
+    .footer-logo {
+      font-family: 'Syne', sans-serif; font-size: 1.3rem;
+      font-weight: 800; color: var(--gold); letter-spacing: 0.1em;
+    }
+    .footer-links { display: flex; gap: 2rem; }
+    .footer-links a {
+      text-decoration: none; color: var(--text-dim);
+      font-size: 0.85rem; transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--gold); }
+    .footer-copy { font-size: 0.78rem; color: #4a5e4a; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      nav ul { display: none; }
+      .featured-inner { grid-template-columns: 1fr; }
+      .newsletter { padding: 2.5rem; }
+      .stats { gap: 1.5rem; }
+      footer { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">FIN<span>AC</span></div>
+  <ul>
+    <li><a href="#topics">Topics</a></li>
+    <li><a href="#posts">Articles</a></li>
+    <li><a href="#newsletter">Newsletter</a></li>
+    <li><a href="#newsletter" class="nav-cta">Get Started</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-content">
+    <div class="eyebrow">Your Money, Your Rules</div>
+    <h1>Master Your <span class="accent">Finances</span><br>Build Real Wealth</h1>
+    <p class="hero-sub">FINAC gives you clear, no-fluff guidance on budgeting, investing, and growing your money — whatever your starting point.</p>
+    <div class="btn-row">
+      <a href="#topics" class="btn-primary">Explore Topics</a>
+      <a href="#newsletter" class="btn-secondary">Free Weekly Tips</a>
+    </div>
+    <div class="stats">
+      <div>
+        <div class="stat-num">50+</div>
+        <div class="stat-label">In-depth guides</div>
+      </div>
+      <div>
+        <div class="stat-num">12K</div>
+        <div class="stat-label">Monthly readers</div>
+      </div>
+      <div>
+        <div class="stat-num">100%</div>
+        <div class="stat-label">Free to read</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TOPICS -->
+<section class="topics" id="topics">
+  <div class="section-label">What We Cover</div>
+  <h2 class="section-title">Every corner of<br>your financial life</h2>
+  <div class="topic-grid">
+    <div class="topic-card">
+      <div class="topic-icon">💰</div>
+      <h3>Budgeting</h3>
+      <p>Build a budget that actually works with your lifestyle — not against it.</p>
+      <span class="topic-tag">→ Read guides</span>
+    </div>
+    <div class="topic-card">
+      <div class="topic-icon">📈</div>
+      <h3>Investing</h3>
+      <p>From index funds to real estate — learn how to grow your money over time.</p>
+      <span class="topic-tag">→ Read guides</span>
+    </div>
+    <div class="topic-card">
+      <div class="topic-icon">🏦</div>
+      <h3>Saving</h3>
+      <p>Emergency funds, high-yield accounts, and smart saving habits explained simply.</p>
+      <span class="topic-tag">→ Read guides</span>
+    </div>
+    <div class="topic-card">
+      <div class="topic-icon">💳</div>
+      <h3>Debt & Credit</h3>
+      <p>Strategies to pay off debt faster and build a credit score that opens doors.</p>
+      <span class="topic-tag">→ Read guides</span>
+    </div>
+    <div class="topic-card">
+      <div class="topic-icon">🧾</div>
+      <h3>Taxes</h3>
+      <p>Understand deductions, filing tips, and how to keep more of what you earn.</p>
+      <span class="topic-tag">→ Read guides</span>
+    </div>
+    <div class="topic-card">
+      <div class="topic-icon">🚀</div>
+      <h3>Side Income</h3>
+      <p>Real ways to earn more — from freelancing to passive income streams.</p>
+      <span class="topic-tag">→ Read guides</span>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURED -->
+<section class="featured" id="featured">
+  <div class="featured-inner">
+    <div>
+      <div class="featured-label">Featured Article</div>
+      <h2>The 50/30/20 Rule: A Budget Framework That Works</h2>
+      <p>Most budgets fail because they're too complicated. The 50/30/20 rule splits your take-home pay into three buckets — needs, wants, and savings — so you always know where your money should go without tracking every penny.</p>
+      <a href="#" class="btn-primary">Read Article</a>
+      <div class="article-meta">By <strong>FINAC Editorial</strong> · 8 min read · Budgeting</div>
+    </div>
+    <div class="featured-visual">
+      <div class="chart-title">Where your money goes — 50/30/20</div>
+      <div class="bar-row">
+        <div class="bar-label"><span>Needs (rent, food, bills)</span><span>50%</span></div>
+        <div class="bar-track"><div class="bar-fill" style="width:50%"></div></div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label"><span>Wants (dining, fun, travel)</span><span>30%</span></div>
+        <div class="bar-track"><div class="bar-fill" style="width:30%"></div></div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label"><span>Savings & debt payoff</span><span>20%</span></div>
+        <div class="bar-track"><div class="bar-fill" style="width:20%"></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LATEST POSTS -->
+<section class="posts" id="posts">
+  <div class="section-label">Latest Articles</div>
+  <h2 class="section-title">Fresh from FINAC</h2>
+  <div class="posts-grid">
+    <div class="post-card">
+      <div class="post-category">Investing</div>
+      <h3>Index Funds vs ETFs: What's the Real Difference?</h3>
+      <p>Both are popular, low-cost options — but they work differently. Here's what matters for your portfolio.</p>
+      <div class="post-meta">June 20, 2026 · 6 min read</div>
+    </div>
+    <div class="post-card">
+      <div class="post-category">Saving</div>
+      <h3>How to Build a $1,000 Emergency Fund in 90 Days</h3>
+      <p>A step-by-step plan that works even if money feels tight right now.</p>
+      <div class="post-meta">June 15, 2026 · 5 min read</div>
+    </div>
+    <div class="post-card">
+      <div class="post-category">Debt</div>
+      <h3>Avalanche vs Snowball: The Best Way to Pay Off Debt</h3>
+      <p>One saves you more money. The other keeps you motivated. We break down both strategies honestly.</p>
+      <div class="post-meta">June 10, 2026 · 7 min read</div>
+    </div>
+    <div class="post-card">
+      <div class="post-category">Side Income</div>
+      <h3>5 Legitimate Ways to Earn an Extra $500 a Month</h3>
+      <p>No get-rich-quick schemes — just real, tested methods that people are actually using.</p>
+      <div class="post-meta">June 5, 2026 · 6 min read</div>
+    </div>
+    <div class="post-card">
+      <div class="post-category">Taxes</div>
+      <h3>Tax Deductions Most People Miss (And How to Claim Them)</h3>
+      <p>You might be leaving money on the table every year. Here's what to look for.</p>
+      <div class="post-meta">May 28, 2026 · 8 min read</div>
+    </div>
+    <div class="post-card">
+      <div class="post-category">Budgeting</div>
+      <h3>Zero-Based Budgeting: Give Every Dollar a Job</h3>
+      <p>A powerful method for people who want total control over their spending.</p>
+      <div class="post-meta">May 22, 2026 · 5 min read</div>
+    </div>
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<div class="newsletter" id="newsletter">
+  <div>
+    <h2>Money tips, every week.</h2>
+    <p>Join 12,000+ readers getting practical finance advice — free.</p>
+  </div>
+  <div class="newsletter-form">
+    <input type="email" placeholder="your@email.com" />
+    <button>Subscribe</button>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">FINAC</div>
+  <div class="footer-links">
+    <a href="#">About</a>
+    <a href="#">Topics</a>
+    <a href="#">Privacy Policy</a>
+    <a href="#">Contact</a>
+  </div>
+  <div class="footer-copy">© 2026 FINAC. All rights reserved.</div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About – FINAC</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --green-dark: #0a2e1a; --green-mid: #145a32; --green-light: #1e8449;
+      --gold: #c9a84c; --gold-light: #f0c040; --white: #ffffff; --text-dim: #a8b8a0; --body-text: #d4e4d0;
+    }
+    body { font-family: 'Inter', sans-serif; background: var(--green-dark); color: var(--white); overflow-x: hidden; }
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.2rem 5%; background: rgba(10,46,26,0.92);
+      backdrop-filter: blur(12px); border-bottom: 1px solid rgba(201,168,76,0.15);
+    }
+    .logo { font-family: 'Syne', sans-serif; font-size: 1.7rem; font-weight: 800; letter-spacing: 0.12em; color: var(--gold); text-decoration: none; }
+    .logo span { color: var(--white); }
+    nav ul { list-style: none; display: flex; gap: 2rem; }
+    nav ul a { text-decoration: none; color: var(--text-dim); font-size: 0.9rem; font-weight: 500; transition: color 0.2s; }
+    nav ul a:hover { color: var(--gold-light); }
+    .nav-cta { background: var(--gold); color: var(--green-dark) !important; padding: 0.5rem 1.2rem; border-radius: 4px; font-weight: 600 !important; }
+
+    /* Hero */
+    .about-hero {
+      min-height: 60vh; display: flex; flex-direction: column; justify-content: flex-end;
+      padding: 9rem 5% 5rem; position: relative; overflow: hidden;
+      border-bottom: 1px solid rgba(201,168,76,0.1);
+    }
+    .hero-grid {
+      position: absolute; inset: 0;
+      background-image: linear-gradient(rgba(201,168,76,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(201,168,76,0.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+    .hero-glow { position: absolute; top: -10%; right: -5%; width: 50vw; height: 50vw; border-radius: 50%; background: radial-gradient(circle, rgba(30,132,73,0.2) 0%, transparent 70%); }
+    .about-hero-content { position: relative; max-width: 700px; }
+    .eyebrow { display: inline-flex; align-items: center; gap: 0.6rem; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.14em; color: var(--gold); text-transform: uppercase; margin-bottom: 1.5rem; }
+    .eyebrow::before { content: ''; display: block; width: 28px; height: 2px; background: var(--gold); }
+    .about-hero h1 { font-family: 'Syne', sans-serif; font-size: clamp(2.2rem, 5vw, 4rem); font-weight: 800; line-height: 1.1; margin-bottom: 1.5rem; }
+    .about-hero h1 .accent { color: var(--gold); }
+    .about-hero p { font-size: 1.1rem; color: var(--text-dim); line-height: 1.75; max-width: 580px; }
+
+    /* Mission */
+    .mission { padding: 6rem 5%; display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+    .mission-text h2 { font-family: 'Syne', sans-serif; font-size: clamp(1.6rem, 3vw, 2.4rem); font-weight: 800; margin-bottom: 1.5rem; line-height: 1.2; }
+    .mission-text p { color: var(--body-text); line-height: 1.85; margin-bottom: 1.2rem; font-size: 0.95rem; }
+    .mission-visual { display: flex; flex-direction: column; gap: 1rem; }
+    .mission-stat {
+      background: rgba(255,255,255,0.03); border: 1px solid rgba(201,168,76,0.12);
+      border-radius: 8px; padding: 1.5rem 2rem;
+      display: flex; align-items: center; gap: 1.5rem;
+    }
+    .stat-num { font-family: 'Syne', sans-serif; font-size: 2.2rem; font-weight: 800; color: var(--gold); min-width: 80px; }
+    .stat-desc { font-size: 0.88rem; color: var(--text-dim); line-height: 1.5; }
+
+    /* Values */
+    .values { padding: 6rem 5%; background: rgba(255,255,255,0.02); }
+    .section-label { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem; }
+    .section-title { font-family: 'Syne', sans-serif; font-size: clamp(1.8rem, 3.5vw, 2.6rem); font-weight: 800; margin-bottom: 3rem; }
+    .values-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; }
+    .value-card { padding: 2rem; border: 1px solid rgba(201,168,76,0.1); border-radius: 8px; transition: border-color 0.2s; }
+    .value-card:hover { border-color: rgba(201,168,76,0.35); }
+    .value-icon { font-size: 2rem; margin-bottom: 1rem; }
+    .value-card h3 { font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 800; margin-bottom: 0.6rem; }
+    .value-card p { font-size: 0.88rem; color: var(--text-dim); line-height: 1.65; }
+
+    /* Team */
+    .team { padding: 6rem 5%; }
+    .team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 2rem; margin-top: 3rem; }
+    .team-card { text-align: center; }
+    .team-avatar {
+      width: 80px; height: 80px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--green-mid), var(--green-light));
+      border: 2px solid rgba(201,168,76,0.3);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.8rem; margin: 0 auto 1rem;
+    }
+    .team-card h3 { font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 800; margin-bottom: 0.3rem; }
+    .team-card .role { font-size: 0.8rem; color: var(--gold); font-weight: 600; margin-bottom: 0.6rem; }
+    .team-card p { font-size: 0.83rem; color: var(--text-dim); line-height: 1.6; }
+
+    /* CTA */
+    .about-cta {
+      margin: 0 5% 6rem;
+      background: linear-gradient(135deg, var(--green-mid), #0d3d20);
+      border: 1px solid rgba(201,168,76,0.2); border-radius: 12px;
+      padding: 4rem; text-align: center;
+    }
+    .about-cta h2 { font-family: 'Syne', sans-serif; font-size: clamp(1.5rem, 3vw, 2.2rem); font-weight: 800; margin-bottom: 1rem; }
+    .about-cta p { color: var(--text-dim); margin-bottom: 2rem; font-size: 0.95rem; }
+    .btn-primary { background: var(--gold); color: var(--green-dark); padding: 0.85rem 2.2rem; border-radius: 4px; font-weight: 700; font-size: 0.95rem; text-decoration: none; transition: background 0.2s; display: inline-block; }
+    .btn-primary:hover { background: var(--gold-light); }
+
+    footer { border-top: 1px solid rgba(201,168,76,0.1); padding: 2.5rem 5%; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+    .footer-logo { font-family: 'Syne', sans-serif; font-size: 1.3rem; font-weight: 800; color: var(--gold); letter-spacing: 0.1em; }
+    .footer-links { display: flex; gap: 2rem; }
+    .footer-links a { text-decoration: none; color: var(--text-dim); font-size: 0.85rem; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--gold); }
+    .footer-copy { font-size: 0.78rem; color: #4a5e4a; }
+    @media (max-width: 768px) { nav ul { display: none; } .mission { grid-template-columns: 1fr; gap: 3rem; } footer { flex-direction: column; text-align: center; } .about-cta { padding: 2.5rem; } }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="logo">FIN<span>AC</span></a>
+  <ul>
+    <li><a href="index.html#topics">Topics</a></li>
+    <li><a href="index.html#posts">Articles</a></li>
+    <li><a href="index.html#newsletter">Newsletter</a></li>
+    <li><a href="index.html#newsletter" class="nav-cta">Get Started</a></li>
+  </ul>
+</nav>
+
+<!-- Hero -->
+<section class="about-hero">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="about-hero-content">
+    <div class="eyebrow">Our Story</div>
+    <h1>We believe <span class="accent">financial clarity</span> should be free for everyone</h1>
+    <p>FINAC was built on one idea: money advice shouldn't be locked behind paywalls, jargon, or products trying to sell you something. Just honest, practical guidance — for free.</p>
+  </div>
+</section>
+
+<!-- Mission -->
+<section class="mission">
+  <div class="mission-text">
+    <h2>Why we started FINAC</h2>
+    <p>Most personal finance content is either too basic to be useful, or buried in complexity that only benefits the person writing it. We saw a gap: people who genuinely wanted to improve their finances but couldn't find a trusted, no-agenda resource.</p>
+    <p>So we built one. FINAC covers everything from your first budget to long-term investing — written clearly, updated regularly, and completely free to read.</p>
+    <p>No courses to buy. No products to push. Just information that helps you make smarter decisions with your money.</p>
+  </div>
+  <div class="mission-visual">
+    <div class="mission-stat">
+      <div class="stat-num">50+</div>
+      <div class="stat-desc">In-depth guides covering every area of personal finance</div>
+    </div>
+    <div class="mission-stat">
+      <div class="stat-num">12K</div>
+      <div class="stat-desc">Readers every month trusting FINAC for money advice</div>
+    </div>
+    <div class="mission-stat">
+      <div class="stat-num">100%</div>
+      <div class="stat-desc">Free to read — always. No subscriptions, no paywalls</div>
+    </div>
+  </div>
+</section>
+
+<!-- Values -->
+<section class="values">
+  <div class="section-label">What We Stand For</div>
+  <h2 class="section-title">Our principles</h2>
+  <div class="values-grid">
+    <div class="value-card">
+      <div class="value-icon">🎯</div>
+      <h3>Clarity over cleverness</h3>
+      <p>We write to be understood, not to impress. If a 16-year-old can't follow it, we rewrite it.</p>
+    </div>
+    <div class="value-card">
+      <div class="value-icon">🔍</div>
+      <h3>No hidden agendas</h3>
+      <p>We don't take commission on products we mention. Our only income is display advertising — clearly labelled.</p>
+    </div>
+    <div class="value-card">
+      <div class="value-icon">📅</div>
+      <h3>Always up to date</h3>
+      <p>Tax laws change. Interest rates shift. We review and update our content regularly so you're never reading stale advice.</p>
+    </div>
+    <div class="value-card">
+      <div class="value-icon">🤝</div>
+      <h3>Real-world focused</h3>
+      <p>We write for people with real incomes, real debt, and real constraints — not theoretical examples with perfect conditions.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Team -->
+<section class="team">
+  <div class="section-label">The People Behind FINAC</div>
+  <h2 class="section-title">Meet the team</h2>
+  <div class="team-grid">
+    <div class="team-card">
+      <div class="team-avatar">👤</div>
+      <h3>Alex Morgan</h3>
+      <div class="role">Founder & Editor</div>
+      <p>Former financial analyst with 10 years of experience making complex money topics simple for everyday people.</p>
+    </div>
+    <div class="team-card">
+      <div class="team-avatar">👤</div>
+      <h3>Jordan Lee</h3>
+      <div class="role">Investment Writer</div>
+      <p>CFA-qualified investment specialist covering stocks, ETFs, and long-term wealth building strategies.</p>
+    </div>
+    <div class="team-card">
+      <div class="team-avatar">👤</div>
+      <h3>Sam Rivera</h3>
+      <div class="role">Budgeting & Debt</div>
+      <p>Paid off $40k in debt in three years. Now shares the exact methods that worked — and what didn't.</p>
+    </div>
+    <div class="team-card">
+      <div class="team-avatar">👤</div>
+      <h3>Taylor Kim</h3>
+      <div class="role">Tax & Side Income</div>
+      <p>Former tax consultant who helps readers understand the rules, find deductions, and earn more on the side.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="about-cta">
+  <h2>Ready to take control of your money?</h2>
+  <p>Start with our most popular guides or subscribe for weekly tips delivered free to your inbox.</p>
+  <a href="index.html#topics" class="btn-primary">Explore All Topics</a>
+</div>
+
+<footer>
+  <div class="footer-logo">FINAC</div>
+  <div class="footer-links">
+    <a href="about.html">About</a>
+    <a href="index.html#topics">Topics</a>
+    <a href="privacy.html">Privacy Policy</a>
+    <a href="contact.html">Contact</a>
+  </div>
+  <div class="footer-copy">© 2026 FINAC. All rights reserved.</div>
+</footer>
+</body>
+</html>

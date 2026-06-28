@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact – FINAC</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --green-dark: #0a2e1a; --green-mid: #145a32; --green-light: #1e8449;
+      --gold: #c9a84c; --gold-light: #f0c040; --white: #ffffff; --text-dim: #a8b8a0; --body-text: #d4e4d0;
+    }
+    body { font-family: 'Inter', sans-serif; background: var(--green-dark); color: var(--white); overflow-x: hidden; }
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.2rem 5%; background: rgba(10,46,26,0.92);
+      backdrop-filter: blur(12px); border-bottom: 1px solid rgba(201,168,76,0.15);
+    }
+    .logo { font-family: 'Syne', sans-serif; font-size: 1.7rem; font-weight: 800; letter-spacing: 0.12em; color: var(--gold); text-decoration: none; }
+    .logo span { color: var(--white); }
+    nav ul { list-style: none; display: flex; gap: 2rem; }
+    nav ul a { text-decoration: none; color: var(--text-dim); font-size: 0.9rem; font-weight: 500; transition: color 0.2s; }
+    nav ul a:hover { color: var(--gold-light); }
+    .nav-cta { background: var(--gold); color: var(--green-dark) !important; padding: 0.5rem 1.2rem; border-radius: 4px; font-weight: 600 !important; }
+
+    .page-hero { padding: 9rem 5% 5rem; border-bottom: 1px solid rgba(201,168,76,0.1); position: relative; overflow: hidden; }
+    .hero-grid { position: absolute; inset: 0; background-image: linear-gradient(rgba(201,168,76,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(201,168,76,0.04) 1px, transparent 1px); background-size: 60px 60px; }
+    .hero-glow { position: absolute; top: -20%; right: -10%; width: 50vw; height: 50vw; border-radius: 50%; background: radial-gradient(circle, rgba(30,132,73,0.2) 0%, transparent 70%); }
+    .page-hero-content { position: relative; }
+    .eyebrow { display: inline-flex; align-items: center; gap: 0.6rem; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.14em; color: var(--gold); text-transform: uppercase; margin-bottom: 1.5rem; }
+    .eyebrow::before { content: ''; display: block; width: 28px; height: 2px; background: var(--gold); }
+    .page-hero h1 { font-family: 'Syne', sans-serif; font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 800; margin-bottom: 1rem; line-height: 1.1; }
+    .page-hero p { color: var(--text-dim); font-size: 1rem; max-width: 500px; line-height: 1.7; }
+
+    /* Contact layout */
+    .contact-wrap { max-width: 1100px; margin: 0 auto; padding: 5rem 5%; display: grid; grid-template-columns: 1fr 1.4fr; gap: 5rem; align-items: start; }
+
+    /* Info side */
+    .contact-info h2 { font-family: 'Syne', sans-serif; font-size: 1.4rem; font-weight: 800; margin-bottom: 1rem; }
+    .contact-info p { color: var(--body-text); line-height: 1.8; font-size: 0.93rem; margin-bottom: 2rem; }
+    .contact-method { display: flex; align-items: flex-start; gap: 1rem; padding: 1.2rem; border: 1px solid rgba(201,168,76,0.1); border-radius: 8px; margin-bottom: 1rem; transition: border-color 0.2s; }
+    .contact-method:hover { border-color: rgba(201,168,76,0.3); }
+    .contact-icon { font-size: 1.4rem; min-width: 36px; }
+    .contact-method h4 { font-family: 'Syne', sans-serif; font-size: 0.85rem; font-weight: 800; margin-bottom: 0.3rem; }
+    .contact-method p { color: var(--text-dim); font-size: 0.82rem; margin: 0; line-height: 1.5; }
+    .contact-method a { color: var(--gold); text-decoration: none; font-size: 0.88rem; font-weight: 600; }
+
+    .response-note { background: rgba(201,168,76,0.07); border: 1px solid rgba(201,168,76,0.2); border-radius: 8px; padding: 1.2rem 1.5rem; margin-top: 1.5rem; }
+    .response-note p { color: var(--text-dim); font-size: 0.83rem; line-height: 1.6; margin: 0; }
+    .response-note strong { color: var(--gold); }
+
+    /* Form side */
+    .contact-form-wrap { background: rgba(255,255,255,0.03); border: 1px solid rgba(201,168,76,0.1); border-radius: 12px; padding: 2.5rem; }
+    .form-title { font-family: 'Syne', sans-serif; font-size: 1.2rem; font-weight: 800; margin-bottom: 0.5rem; }
+    .form-subtitle { font-size: 0.85rem; color: var(--text-dim); margin-bottom: 2rem; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .field { margin-bottom: 1.2rem; }
+    .field label { display: block; font-size: 0.8rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 0.5rem; }
+    .field input, .field select, .field textarea {
+      width: 100%; background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(201,168,76,0.15); color: var(--white);
+      padding: 0.8rem 1rem; border-radius: 5px; font-size: 0.9rem;
+      font-family: 'Inter', sans-serif; outline: none; transition: border-color 0.2s;
+    }
+    .field input:focus, .field select:focus, .field textarea:focus { border-color: var(--gold); }
+    .field input::placeholder, .field textarea::placeholder { color: #5a6e5a; }
+    .field select option { background: var(--green-dark); }
+    .field textarea { resize: vertical; min-height: 130px; }
+    .submit-btn {
+      width: 100%; background: var(--gold); color: var(--green-dark);
+      border: none; padding: 0.9rem; border-radius: 5px;
+      font-weight: 700; font-size: 0.95rem; cursor: pointer;
+      font-family: 'Syne', sans-serif; letter-spacing: 0.04em;
+      transition: background 0.2s; margin-top: 0.5rem;
+    }
+    .submit-btn:hover { background: var(--gold-light); }
+    .form-disclaimer { font-size: 0.75rem; color: #5a6e5a; text-align: center; margin-top: 1rem; line-height: 1.5; }
+    .form-disclaimer a { color: var(--text-dim); }
+
+    /* Success message (hidden by default) */
+    .success-msg {
+      display: none; background: rgba(30,132,73,0.15);
+      border: 1px solid rgba(30,132,73,0.4); border-radius: 8px;
+      padding: 1.5rem; text-align: center; margin-top: 1rem;
+    }
+    .success-msg h3 { font-family: 'Syne', sans-serif; font-size: 1.1rem; font-weight: 800; color: var(--gold); margin-bottom: 0.5rem; }
+    .success-msg p { color: var(--text-dim); font-size: 0.88rem; }
+
+    /* Topics FAQ */
+    .faq { padding: 5rem 5%; background: rgba(255,255,255,0.02); }
+    .section-label { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem; }
+    .section-title { font-family: 'Syne', sans-serif; font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 800; margin-bottom: 3rem; }
+    .faq-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; max-width: 1100px; margin: 0 auto; }
+    .faq-item { padding: 1.5rem; border: 1px solid rgba(201,168,76,0.1); border-radius: 8px; }
+    .faq-item h3 { font-family: 'Syne', sans-serif; font-size: 0.95rem; font-weight: 800; margin-bottom: 0.7rem; color: var(--white); }
+    .faq-item p { font-size: 0.85rem; color: var(--text-dim); line-height: 1.65; }
+
+    footer { border-top: 1px solid rgba(201,168,76,0.1); padding: 2.5rem 5%; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-top: 4rem; }
+    .footer-logo { font-family: 'Syne', sans-serif; font-size: 1.3rem; font-weight: 800; color: var(--gold); letter-spacing: 0.1em; }
+    .footer-links { display: flex; gap: 2rem; }
+    .footer-links a { text-decoration: none; color: var(--text-dim); font-size: 0.85rem; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--gold); }
+    .footer-copy { font-size: 0.78rem; color: #4a5e4a; }
+    @media (max-width: 850px) { nav ul { display: none; } .contact-wrap { grid-template-columns: 1fr; gap: 3rem; } .form-row { grid-template-columns: 1fr; } footer { flex-direction: column; text-align: center; } }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="logo">FIN<span>AC</span></a>
+  <ul>
+    <li><a href="index.html#topics">Topics</a></li>
+    <li><a href="index.html#posts">Articles</a></li>
+    <li><a href="index.html#newsletter">Newsletter</a></li>
+    <li><a href="index.html#newsletter" class="nav-cta">Get Started</a></li>
+  </ul>
+</nav>
+
+<div class="page-hero">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="page-hero-content">
+    <div class="eyebrow">Get in Touch</div>
+    <h1>We'd love to hear from you</h1>
+    <p>Questions, feedback, article suggestions, or partnership enquiries — we read everything and reply within 2 business days.</p>
+  </div>
+</div>
+
+<div class="contact-wrap">
+
+  <!-- Left: info -->
+  <div class="contact-info">
+    <h2>How to reach us</h2>
+    <p>We're a small team, so we personally read every message. Whether you have a question about an article, want to suggest a topic, or are interested in advertising with FINAC — we're here.</p>
+
+    <div class="contact-method">
+      <div class="contact-icon">✉️</div>
+      <div>
+        <h4>General Enquiries</h4>
+        <p>For questions, feedback, or content suggestions</p>
+        <a href="mailto:hello@finac.com">hello@finac.com</a>
+      </div>
+    </div>
+    <div class="contact-method">
+      <div class="contact-icon">📢</div>
+      <div>
+        <h4>Advertising & Partnerships</h4>
+        <p>Sponsorships, collaborations, and media kit requests</p>
+        <a href="mailto:ads@finac.com">ads@finac.com</a>
+      </div>
+    </div>
+    <div class="contact-method">
+      <div class="contact-icon">🔒</div>
+      <div>
+        <h4>Privacy & Data</h4>
+        <p>Data requests, GDPR, or privacy concerns</p>
+        <a href="mailto:privacy@finac.com">privacy@finac.com</a>
+      </div>
+    </div>
+
+    <div class="response-note">
+      <p>⏱ <strong>Response time:</strong> We aim to reply within 2 business days. For urgent matters, mark your subject line with [URGENT].</p>
+    </div>
+  </div>
+
+  <!-- Right: form -->
+  <div class="contact-form-wrap">
+    <div class="form-title">Send us a message</div>
+    <div class="form-subtitle">Fill in the form and we'll get back to you shortly.</div>
+
+    <div class="form-row">
+      <div class="field">
+        <label>First Name</label>
+        <input type="text" placeholder="Alex" id="firstName" />
+      </div>
+      <div class="field">
+        <label>Last Name</label>
+        <input type="text" placeholder="Morgan" id="lastName" />
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Email Address</label>
+      <input type="email" placeholder="you@example.com" id="email" />
+    </div>
+
+    <div class="field">
+      <label>Subject</label>
+      <select id="subject">
+        <option value="">Select a topic...</option>
+        <option>Question about an article</option>
+        <option>Article suggestion</option>
+        <option>Advertising & sponsorship</option>
+        <option>Partnership enquiry</option>
+        <option>Privacy or data request</option>
+        <option>Something else</option>
+      </select>
+    </div>
+
+    <div class="field">
+      <label>Message</label>
+      <textarea placeholder="Tell us what's on your mind..." id="message"></textarea>
+    </div>
+
+    <button class="submit-btn" onclick="handleSubmit()">Send Message</button>
+
+    <div class="success-msg" id="successMsg">
+      <h3>Message sent! ✓</h3>
+      <p>Thanks for reaching out. We'll get back to you within 2 business days.</p>
+    </div>
+
+    <p class="form-disclaimer">By submitting this form you agree to our <a href="privacy.html">Privacy Policy</a>. We never share your details with third parties.</p>
+  </div>
+
+</div>
+
+<!-- FAQ -->
+<section class="faq">
+  <div class="section-label">Common Questions</div>
+  <h2 class="section-title">Before you write...</h2>
+  <div class="faq-grid">
+    <div class="faq-item">
+      <h3>Can I write for FINAC?</h3>
+      <p>We occasionally work with contributors who have verified finance credentials. Send your pitch and a writing sample to hello@finac.com with the subject line "Contributor Pitch".</p>
+    </div>
+    <div class="faq-item">
+      <h3>Do you offer financial advice?</h3>
+      <p>Our content is educational and informational only. We are not licensed financial advisors. For personalised advice, please consult a qualified professional in your country.</p>
+    </div>
+    <div class="faq-item">
+      <h3>How do you make money?</h3>
+      <p>FINAC earns revenue through display advertising (Google AdSense). We do not accept payment for editorial content, sponsored reviews, or affiliate links without clear disclosure.</p>
+    </div>
+    <div class="faq-item">
+      <h3>Can I republish your articles?</h3>
+      <p>Our content is copyrighted. You may quote up to 100 words with a link back to the original. For full republication rights, please contact us first.</p>
+    </div>
+    <div class="faq-item">
+      <h3>How do I unsubscribe from emails?</h3>
+      <p>Every newsletter we send includes an unsubscribe link at the bottom. Click it and you'll be removed immediately — no questions asked.</p>
+    </div>
+    <div class="faq-item">
+      <h3>I found an error in an article</h3>
+      <p>We take accuracy seriously. If you spot a mistake, please let us know via this form or email hello@finac.com. We'll review and correct it promptly.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">FINAC</div>
+  <div class="footer-links">
+    <a href="about.html">About</a>
+    <a href="index.html#topics">Topics</a>
+    <a href="privacy.html">Privacy Policy</a>
+    <a href="contact.html">Contact</a>
+  </div>
+  <div class="footer-copy">© 2026 FINAC. All rights reserved.</div>
+</footer>
+
+<script>
+  function handleSubmit() {
+    const first = document.getElementById('firstName').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const message = document.getElementById('message').value.trim();
+    if (!first || !email || !message) {
+      alert('Please fill in your name, email, and message before sending.');
+      return;
+    }
+    document.getElementById('successMsg').style.display = 'block';
+    document.querySelector('.submit-btn').disabled = true;
+    document.querySelector('.submit-btn').textContent = 'Sent ✓';
+    document.querySelector('.submit-btn').style.background = '#1e8449';
+  }
+</script>
+
+</body>
+</html>
